@@ -56,13 +56,14 @@ def update():                   #定義「主程序」，說明如下：
             df_= df_.dropna(axis=1,how='any')                   #但實際使用發現 自動加入的index會造成多出的列，且這些列中有NaN，所以drop掉任何有NaN的列
             df_.to_csv(stkno+'.csv')                            #儲存
         except:
-            df_=df                                              #對於後者，則將df_ 定義為爬到的資訊（因為 0 執行上面的指令會報錯）
+            df_=df                                              #對於後者，則將df_ 定義為爬到的資訊（因為 df_為0時，執行上面的指令會報錯）
             df_.to_csv(stkno+'.csv')                            #儲存
         var.set(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) #更新窗口上「顯示更新時間」
+        time.sleep(1)                               #對於爬取多隻股票，設定時間間隔使伺服器回應
     
-def r_update():                     #定義「regular update」：定期更新
+def r_update():                     #定義「regular update」：定時更新
     update()                        #執行主程序
-    window.after(10000, r_update)   #執行後過 10秒（10000毫秒)，執行「regular update」
+    window.after(1000*60, r_update)   #執行後過 60秒（100000毫秒)，執行「regular update」
 
 r_update()      #執行「regular update」
 
