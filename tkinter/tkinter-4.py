@@ -83,7 +83,7 @@ rect = canvas.create_rectangle(80,80,100,100)
 arc = canvas.create_arc(100,60,120,80,start=50,extent=90)
 
 def up():
-    canvas.move(rect,0,-2)
+    canvas.move(rect,0,-10)
 def left():
     canvas.move(rect,-2,0)
 def down():
